@@ -1,11 +1,6 @@
 name: Python package
 
-on:
-  push:
-    # Sequence of patterns matched against refs/heads
-    branches: 
-      - production
-      - dev
+on: [push, pull_request]
 jobs:
   build:
 
