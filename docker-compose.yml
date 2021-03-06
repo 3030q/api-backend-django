@@ -19,7 +19,7 @@ services:
   db:
     image: postgres:13.0-alpine
     volumes:
-      - postgres_data:/home/nikita/PycharmProjects/data/
+      - postgres_data:/var/lib/postgresql/data
     environment:
       - POSTGRES_USER=hello_django
       - POSTGRES_PASSWORD=hello_django
