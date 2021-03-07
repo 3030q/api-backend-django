@@ -34,4 +34,4 @@ jobs:
         python manage.py makemigrations
         python manage.py migrate
     - name: Run tests
-      run: pytest
+      run: pytest --rootdir=api_backend_parser
