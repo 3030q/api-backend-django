@@ -34,6 +34,8 @@ jobs:
         python manage.py makemigrations
         python manage.py migrate
     - name: Check directory
-      run: ls
+      run: |
+        ls
+        cd api_backend_parser
     - name: Run tests
-      run: pytest --rootdir=/home/runner/work/api-backend-django/api_backend_parser/
+      run: pytest
