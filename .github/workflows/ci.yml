@@ -38,4 +38,4 @@ jobs:
         ls
         cd api_backend_parser
     - name: Run tests
-      run: pytest
+      run: py.test --ds=api_backend_parser.settings
