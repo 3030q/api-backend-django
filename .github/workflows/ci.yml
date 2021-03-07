@@ -36,4 +36,4 @@ jobs:
     - name: Check directory
       run: ls
     - name: Run tests
-      run: pytest --rootdir=/home/runner/work/api-backend-django/api_backend_django/
+      run: pytest --rootdir=/home/runner/work/api-backend-django/api_backend_parser/
