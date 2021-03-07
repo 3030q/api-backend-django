@@ -15,11 +15,13 @@ jobs:
         # needed because the postgres container does not provide a healthcheck
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
     - name: Set up Python 3.7
       uses: actions/setup-python@v1
       with:
         python-version: 3.7
+    - name: Define settings
+      run: export DJANGO_SETTINGS_MODULE=api_backend_parser.settings
     - name: psycopg2 prerequisites
       run: sudo apt-get install python-dev libpq-dev
     - name: Install dependencies
@@ -30,4 +32,4 @@ jobs:
     - name: Run migrations
       run: python manage.py migrate
     - name: Run tests
-      run: py.test
+      run: pytest --rootdir=/home/runner/work/api-backend-django
