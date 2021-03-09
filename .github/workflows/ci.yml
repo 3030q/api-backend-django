@@ -20,8 +20,6 @@ jobs:
       uses: actions/setup-python@v1
       with:
         python-version: 3.7
-    - name: Define settings
-      run: export DJANGO_SETTINGS_MODULE=api_backend_parser.settings
     - name: psycopg2 prerequisites
       run: sudo apt-get install python-dev libpq-dev
     - name: Install dependencies
@@ -30,6 +28,8 @@ jobs:
         pip install -r requirements.txt
         pip install pytest-django
     - name: Run migrations
-      run: python manage.py migrate
+      run: |
+        python manage.py makemigrations
+        python manage.py migrate
     - name: Run tests
-      run: pytest --rootdir=/home/runner/work/api-backend-django
+      run: py.test --ds=api_backend_parser.settings
