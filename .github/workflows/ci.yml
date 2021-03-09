@@ -30,6 +30,6 @@ jobs:
     - name: Run migrations
       run: |
         python manage.py makemigrations
-        python manage.py migrater
+        python manage.py migrate
     - name: Run tests
       run: py.test --ds=api_backend_parser.settings
