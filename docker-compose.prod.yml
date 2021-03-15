@@ -3,15 +3,15 @@ version: '3.7'
 services:
   web:
     build:
-      context: .
-      dockerfile: Dockerfile.prod
+      context: ""
+      dockerfile: docker/Dockerfile.prod
     command: gunicorn api_backend_parser.wsgi:application --bind 0.0.0.0:8000
     volumes:
       - static_volume:/home/app/web/staticfiles
     expose:
       - 8000
     env_file:
-      - ./.env.prod
+      - docker/.env.prod
     depends_on:
       - db
   db:
@@ -19,11 +19,11 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
     env_file:
-      - ./.env.prod.db
+      - docker/.env.prod.db
     ports:
       - 5432:5432
   nginx:
-    build: ./nginx
+    build: docker/nginx
     volumes:
       - static_volume:/home/app/web/staticfiles
     ports:

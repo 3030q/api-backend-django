@@ -2,18 +2,21 @@ version: '3.7'
 
 services:
   web:
-    build: .
+
+    build:
+      context: ""
+      dockerfile: docker/Dockerfile
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/usr/src/app/
     ports:
       - 8000:8000
     env_file:
-      - ./.env.dev
+      - docker/.env.dev
     environment:
-      - POSTGRES_USER=hello_django
-      - POSTGRES_PASSWORD=hello_django
-      - POSTGRES_DB=hello_django_dev
+      - POSTGRES_USER=parser
+      - POSTGRES_PASSWORD=parser
+      - POSTGRES_DB=parser
     depends_on:
       - db
   db:
@@ -21,9 +24,10 @@ services:
     volumes:
       - postgres_data:/home/nikita/PycharmProjects/data2/
     environment:
-      - POSTGRES_USER=hello_django
-      - POSTGRES_PASSWORD=hello_django
-      - POSTGRES_DB=hello_django_dev
-
+      - POSTGRES_USER=parser
+      - POSTGRES_PASSWORD=parser
+      - POSTGRES_DB=parser
+    ports:
+      - 5432:5432
 volumes:
   postgres_data:

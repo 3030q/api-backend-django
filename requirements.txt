@@ -1,3 +1,10 @@
 Django>=3.0,<4.0
+djangorestframework>=3.12.2,<4.0
 psycopg2-binary>=2.8
 gunicorn>=20.0.4
+PyYaml>=5.4.1
+uritemplate>=3.0.1
+coreapi>=2.3.3
+djangorestframework-simplejwt>=4.6,<5.0
+requests>=2.25.1, <3.0
+json-rpc>=1.13.0, <2.0
