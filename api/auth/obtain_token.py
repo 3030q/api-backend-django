@@ -6,7 +6,6 @@ from rest_framework_simplejwt.serializers import PasswordField
 from rest_framework_simplejwt.state import User
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.views import TokenObtainPairView
-from rest_framework_simplejwt.serializers import TokenObtainSerializer
 
 
 class MyTokenObtainSerializer(Serializer):
@@ -44,7 +43,6 @@ class MyTokenObtainPairSerializer(MyTokenObtainSerializer):
     def get_token(cls, user):
         token = RefreshToken.for_user(user)
         token['email'] = user.email
-        token['username'] = user.username
         token['first_name'] = user.first_name
         token['last_name'] = user.last_name
         token['last_login'] = str(user.last_login)

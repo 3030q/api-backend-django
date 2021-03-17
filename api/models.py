@@ -1,12 +1,18 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
+from django.utils.translation import ugettext_lazy as _
 
-# Create your models here.
-from rest_framework_simplejwt.state import User
+from .managers import CustomUserManager
 
 
-##########################################
-#                                        #
-# Make email in Django User unique field #
-#                                        #
-##########################################
-User._meta.get_field('email')._unique = True
+class CustomUser(AbstractUser):
+    username = None
+    email = models.EmailField(_('email address'), unique=True)
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
+
+    objects = CustomUserManager()
+
+    def __str__(self):
+        return self.email

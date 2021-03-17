@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'parser_project',
     'tests'
 ]
-
+AUTH_USER_MODEL = 'api.CustomUser'
 
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
