@@ -6,9 +6,5 @@ from jsonrpc.backend.django import api
 
 
 @api_view(['GET'])
-@permission_classes([IsAuthenticated])
 def health(request):
-    return Response(str(request.auth))
-
-
-
+    return Response({'hello': 'hello'})

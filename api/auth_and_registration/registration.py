@@ -1,10 +1,10 @@
 from rest_framework import generics
 from rest_framework.response import Response
-from api.auth.auth_serializer import RegisterSerializer
+from api.auth_and_registration.auth_serializer import RegisterSerializer
 
 
 # Register API
-from api.auth.obtain_token import MyTokenObtainPairSerializer
+from api.auth_and_registration.obtain_token import MyTokenObtainPairSerializer
 
 
 class RegisterApi(generics.GenericAPIView):

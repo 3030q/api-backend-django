@@ -1,7 +1,7 @@
 from django.urls import path
 
 from . import views
-from api.auth import registration, logout, obtain_token
+from api.auth_and_registration import registration, logout, obtain_token
 from rest_framework_simplejwt.views import TokenRefreshView
 
 urlpatterns = [
