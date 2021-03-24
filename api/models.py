@@ -26,6 +26,15 @@ class App(models.Model):
     version = models.CharField(max_length=50, default=None, blank=True, null=True)
     last_modified = models.DateTimeField(default=None, blank=True, null=True)
     last_update_info = models.DateTimeField(auto_now=True, blank=True, null=True)
-    count_reviews = models.IntegerField()
+    count_reviews = models.IntegerField(default=None, blank=True, null=True)
 
 
+class Reviews(models.Model):
+    app = models.ForeignKey(App, on_delete=models.CASCADE)
+    description = models.TextField(default=None, blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    last_update_info = models.DateTimeField(auto_now=True, blank=True, null=True)
+    commentator_name = models.CharField(max_length=50, default=None, blank=True, null=True)
+    rating = models.IntegerField(default=None, blank=True, null=True)
+    is_notified = models.BooleanField(default=False)
+    language = models.CharField(max_length=50, default=None, blank=True, null=True)
