@@ -16,3 +16,16 @@ class CustomUser(AbstractUser):
 
     def __str__(self):
         return self.email
+
+
+class App(models.Model):
+    name = models.CharField(max_length=50, unique=True)
+    url = models.SlugField()
+    ratings = models.FloatField(default=None, blank=True, null=True)
+    dev_name = models.CharField(max_length=50, default=None, blank=True, null=True)
+    version = models.CharField(max_length=50, default=None, blank=True, null=True)
+    last_modified = models.DateTimeField(default=None, blank=True, null=True)
+    last_update_info = models.DateTimeField(auto_now=True, blank=True, null=True)
+    count_reviews = models.IntegerField()
+
+
