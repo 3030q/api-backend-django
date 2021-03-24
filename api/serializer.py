@@ -1,11 +1,11 @@
 from rest_framework import serializers
 
-from api.models import App
+import api.models
 
 
 class AppSerializer(serializers.ModelSerializer):
     class Meta:
-        model = App
+        model = api.models.App
         fields = [
             'id',
             'name',
@@ -21,16 +21,26 @@ class AppSerializer(serializers.ModelSerializer):
 
 class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
-        model = App
+        model = api.models.Review
+        fields = [
+            'id',
+            'app',
+            'description',
+            'created_at',
+            'last_update_info',
+            'commentator_name',
+            'rating',
+            'is_notified',
+            'language'
+        ]
 
-    fields = [
-        'id',
-        'app',
-        'description',
-        'created_at',
-        'last_update_info',
-        'commentator_name',
-        'rating',
-        'is_notified',
-        'language'
-    ]
+
+class SubscriptionTypeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = api.models.SubscriptionType
+        fields = [
+            'id',
+            'name',
+            'price',
+            'description'
+        ]

@@ -29,7 +29,7 @@ class App(models.Model):
     count_reviews = models.IntegerField(default=None, blank=True, null=True)
 
 
-class Reviews(models.Model):
+class Review(models.Model):
     app = models.ForeignKey(App, on_delete=models.CASCADE)
     description = models.TextField(default=None, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -38,3 +38,9 @@ class Reviews(models.Model):
     rating = models.IntegerField(default=None, blank=True, null=True)
     is_notified = models.BooleanField(default=False)
     language = models.CharField(max_length=50, default=None, blank=True, null=True)
+
+
+class SubscriptionType(models.Model):
+    name = models.CharField(max_length=50, unique=True),
+    price = models.FloatField()
+    description = models.TextField(default=None, blank=True, null=True)
