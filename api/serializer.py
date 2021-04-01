@@ -44,3 +44,32 @@ class SubscriptionTypeSerializer(serializers.ModelSerializer):
             'price',
             'description'
         ]
+
+
+class Subscription(serializers.ModelSerializer):
+    class Meta:
+        model = api.models.Subscription
+        fields = [
+            'user_id',
+            'subscription_type_id',
+            'created_at',
+            'expired_at'
+        ]
+
+
+class IntegrationTypeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = api.models.IntegrationType
+        fields = [
+            'name'
+        ]
+
+
+class IntegrationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = api.models.Integration
+        fields = [
+            'user_id',
+            'app_id',
+            'integration_type_id'
+        ]

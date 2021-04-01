@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-from django.utils.translation import ugettext_lazy as _
 
 from .managers import CustomUserManager
 
@@ -27,6 +26,7 @@ class App(models.Model):
     last_modified = models.DateTimeField(default=None, blank=True, null=True)
     last_update_info = models.DateTimeField(auto_now=True, blank=True, null=True)
     count_reviews = models.IntegerField(default=None, blank=True, null=True)
+    platform = models.CharField(max_length=50, default=None, blank=True, null=True)
 
 
 class Review(models.Model):
@@ -44,3 +44,27 @@ class SubscriptionType(models.Model):
     name = models.CharField(max_length=50, unique=True),
     price = models.FloatField()
     description = models.TextField(default=None, blank=True, null=True)
+
+    class Meta:
+        db_table = 'api_subscription_type'
+
+
+class Subscription(models.Model):
+    user_id = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    subscription_type_id = models.ForeignKey(SubscriptionType, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    expired_at = models.DateTimeField()
+
+
+class IntegrationType(models.Model):
+    name = models.CharField(max_length=50)
+
+    class Meta:
+        db_table = 'api_integration_type'
+
+
+class Integration(models.Model):
+    user_id = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    app_id = models.ForeignKey(App, on_delete=models.CASCADE)
+    integration_type_id = models.ForeignKey(IntegrationType,
+                                            on_delete=models.CASCADE)

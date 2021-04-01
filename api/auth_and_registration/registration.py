@@ -1,6 +1,6 @@
 from rest_framework import generics
 from rest_framework.response import Response
-from api.auth_and_registration.auth_serializer import RegisterSerializer
+from api.auth_and_registration.auth_and_register_serializer import RegisterSerializer
 
 
 # Register API
