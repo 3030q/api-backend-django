@@ -8,6 +8,9 @@ from api.auth_and_registration.obtain_token import MyTokenObtainPairSerializer
 
 
 class RegisterApi(generics.GenericAPIView):
+    """
+    Регистрирует пользователя, выдавая ему access/refresh token
+    """
     serializer_class = RegisterSerializer
 
     def post(self, request, *args, **kwargs):

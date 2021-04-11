@@ -7,4 +7,7 @@ from jsonrpc.backend.django import api
 
 @api_view(['GET'])
 def health(request):
+    """
+    Пинг проверки сервера
+    """
     return Response({'hello': 'hello'})

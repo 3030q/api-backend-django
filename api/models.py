@@ -18,8 +18,8 @@ class CustomUser(AbstractUser):
 
 
 class App(models.Model):
-    name = models.CharField(max_length=50, unique=True)
-    url = models.SlugField()
+    name = models.CharField(max_length=50)
+    url = models.CharField(max_length=50, default=None, blank=True, null=True, unique=True)
     ratings = models.FloatField(default=None, blank=True, null=True)
     dev_name = models.CharField(max_length=50, default=None, blank=True, null=True)
     version = models.CharField(max_length=50, default=None, blank=True, null=True)
@@ -27,10 +27,11 @@ class App(models.Model):
     last_update_info = models.DateTimeField(auto_now=True, blank=True, null=True)
     count_reviews = models.IntegerField(default=None, blank=True, null=True)
     platform = models.CharField(max_length=50, default=None, blank=True, null=True)
+    active = models.BooleanField(default=False)
 
 
 class Review(models.Model):
-    app = models.ForeignKey(App, on_delete=models.CASCADE)
+    app = models.ForeignKey(App, on_delete=models.CASCADE, db_column='app_id')
     description = models.TextField(default=None, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     last_update_info = models.DateTimeField(auto_now=True, blank=True, null=True)
@@ -41,17 +42,22 @@ class Review(models.Model):
 
 
 class SubscriptionType(models.Model):
-    name = models.CharField(max_length=50, unique=True),
+    name = models.CharField(max_length=50, unique=True)
     price = models.FloatField()
     description = models.TextField(default=None, blank=True, null=True)
+    max_app_count = models.IntegerField()
 
     class Meta:
         db_table = 'api_subscription_type'
 
 
 class Subscription(models.Model):
-    user_id = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-    subscription_type_id = models.ForeignKey(SubscriptionType, on_delete=models.CASCADE)
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, db_column='user_id')
+    subscription_type = models.ForeignKey(
+        SubscriptionType,
+        on_delete=models.CASCADE,
+        db_column='subscription_type_id'
+    )
     created_at = models.DateTimeField(auto_now_add=True)
     expired_at = models.DateTimeField()
 
@@ -64,7 +70,10 @@ class IntegrationType(models.Model):
 
 
 class Integration(models.Model):
-    user_id = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-    app_id = models.ForeignKey(App, on_delete=models.CASCADE)
-    integration_type_id = models.ForeignKey(IntegrationType,
-                                            on_delete=models.CASCADE)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, db_column='user_id')
+    app = models.ForeignKey(App, on_delete=models.CASCADE, db_column='app_id')
+    integration_type = models.ForeignKey(
+        IntegrationType,
+        on_delete=models.CASCADE,
+        db_column='integration_type_id'
+    )

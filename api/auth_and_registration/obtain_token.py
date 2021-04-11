@@ -60,4 +60,7 @@ class MyTokenObtainPairSerializer(MyTokenObtainSerializer):
 
 
 class MyTokenObtainPairView(TokenObtainPairView):
+    """
+    Реализует авторизацию пользователя с выдачей access/refresh токена
+    """
     serializer_class = MyTokenObtainPairSerializer

@@ -6,16 +6,18 @@ from rest_framework import status
 
 
 class Logout(APIView):
-    permission_classes = (IsAuthenticated,)
+    """
+    Выход из аккаунта и добавления токенов(access/refresh) в черный список
+    """
+    permission_classes = [IsAuthenticated]
 
     def post(self, request):
         try:
             refresh_token = request.data["refresh"]
-            access_token = request.data["access"]
-            access_token.blacklist()
+            # access_token = request.data["access"]
+            # access_token.blacklist()
             token = RefreshToken(refresh_token)
             token.blacklist()
-            return Response(status=status.HTTP_205_RESET_CONTENT)
-
+            return Response('Logout was successful', status=status.HTTP_205_RESET_CONTENT)
         except Exception as e:
             return Response({"exception": e}, status=status.HTTP_400_BAD_REQUEST)

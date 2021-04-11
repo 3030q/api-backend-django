@@ -14,8 +14,9 @@ class AppSerializer(serializers.ModelSerializer):
             'dev_name',
             'version',
             'last_modified',
-            'last_update_info'
-            'count_reviews'
+            'last_update_info',
+            'count_reviews',
+            'platform',
         ]
 
 
@@ -46,12 +47,13 @@ class SubscriptionTypeSerializer(serializers.ModelSerializer):
         ]
 
 
-class Subscription(serializers.ModelSerializer):
+class SubscriptionSerializer(serializers.ModelSerializer):
     class Meta:
         model = api.models.Subscription
         fields = [
-            'user_id',
-            'subscription_type_id',
+            'id',
+            'user',
+            'subscription_type',
             'created_at',
             'expired_at'
         ]
@@ -61,7 +63,8 @@ class IntegrationTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = api.models.IntegrationType
         fields = [
-            'name'
+            'id',
+            'name',
         ]
 
 
@@ -69,7 +72,8 @@ class IntegrationSerializer(serializers.ModelSerializer):
     class Meta:
         model = api.models.Integration
         fields = [
-            'user_id',
-            'app_id',
-            'integration_type_id'
+            'id',
+            'user',
+            'app',
+            'integration_type'
         ]
