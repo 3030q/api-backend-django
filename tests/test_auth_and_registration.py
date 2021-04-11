@@ -1,6 +1,5 @@
 import pytest
 from rest_framework_simplejwt.backends import TokenBackend
-import django.test.client
 
 from api.models import CustomUser
 
@@ -55,7 +54,7 @@ def test_auth(client, add_test_user):
     response = client.post('/api/login',
                            {'email': 'email@email.email',
                             'password': 'Password!!!'})
-    valid_data = TokenBackend(algorithm='HS256').decode(response.data['access'], verify=False)
+    valid_data = TokenBackend(algorithm='HS256').decode(str(response.data['access']), verify=False)
     assert valid_data['email'] == 'email@email.email'
 
 
