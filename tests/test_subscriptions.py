@@ -4,21 +4,6 @@ import pytest
 
 from api.models import SubscriptionType, Subscription
 from api.serializer import SubscriptionSerializer
-from tests.test_auth_and_registration import auth, add_test_user, add_test_admin, auth_admin
-
-
-@pytest.fixture
-def subscription_type():
-    return SubscriptionType.objects.create(name='Test', price=1000, description='BlahBlah', max_app_count=100)
-
-
-@pytest.fixture
-def subscription(subscription_type, add_test_user):
-    return Subscription.objects.create(
-        user=add_test_user,
-        subscription_type=subscription_type,
-        expired_at=datetime.datetime.now(tz=datetime.timezone.utc) + datetime.timedelta(days=10)
-    )
 
 
 @pytest.mark.django_db

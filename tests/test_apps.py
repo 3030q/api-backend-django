@@ -3,23 +3,9 @@ from datetime import datetime, timezone
 import pytest
 
 from api.models import App
-from tests.test_auth_and_registration import auth, add_test_user
 
 
-@pytest.fixture()
-def app():
-    app = App.objects.create(
-        name='Test',
-        url='Test.com/test/test',
-        ratings=5.0,
-        dev_name='Testus',
-        version='v.2',
-        last_modified=datetime.now(tz=timezone.utc),
-        count_reviews=1000,
-        platform='Google Play',
-        active=True
-    )
-    return app
+
 
 
 @pytest.mark.django_db

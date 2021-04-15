@@ -5,14 +5,7 @@ import pytest
 
 from api.models import IntegrationType, Integration
 from api.serializer import IntegrationSerializer
-from tests.test_auth_and_registration import auth, add_test_user, add_test_admin, auth_admin
-from tests.test_subscriptions import subscription, subscription_type
-from tests.test_apps import app
 
-
-@pytest.fixture
-def integration_type():
-    return IntegrationType.objects.create(name='test')
 
 
 @pytest.mark.django_db
