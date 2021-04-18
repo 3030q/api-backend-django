@@ -46,3 +46,11 @@ def add_integration(request):
 def take_all_integration_types(request):
     serializer = IntegrationTypeSerializer(IntegrationType.objects.all(), many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+@api_view(['Get'])
+@permission_classes([IsAuthenticated])
+def take_integration_list(request):
+    serializer = IntegrationSerializer(Integration.objects.filter(user=request.user.id).all(), many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+

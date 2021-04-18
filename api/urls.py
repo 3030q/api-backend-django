@@ -7,6 +7,7 @@ from rest_framework_simplejwt.views import TokenRefreshView
 from api.apps import app_views
 from api.subscription_and_payments import subscription_views
 from api.integrations import integration_views
+from api.reviews import review_views
 
 urlpatterns = [
     path('health', views.health, name='index'),
@@ -24,6 +25,8 @@ urlpatterns = [
          name='remove_expired_subscription'),
     path('take-subscription', subscription_views.take_subscription, name='take_subscription'),
     path('integration-types', integration_views.take_all_integration_types, name='integration_types'),
-    path('add-integration', integration_views.add_integration, name='add_integration')
+    path('add-integration', integration_views.add_integration, name='add_integration'),
+    path('integration-list', integration_views.take_integration_list, name='integration_list'),
+    path('take-reviews', review_views.take_reviews, name='take_reviews')
 ]
 

@@ -7,14 +7,6 @@ from api.models import App
 from api.serializer import AppSerializer
 
 
-# @permission_classes([IsAuthenticated])
-# @api_view(['GET'])
-# def apps_list(request):
-#     apps = App.objects.filter(user_id=request.user.id).all()
-#     serializer = AppSerializer(data=apps, many=True)
-#     return Response(serializer.data)
-
-
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def add_app(request):

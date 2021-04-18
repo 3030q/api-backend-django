@@ -5,23 +5,16 @@ import pytest
 from api.models import App
 
 
-
-
-
 @pytest.mark.django_db
-def test_take_app(client, app, auth):
-    token = f"Bearer {auth.data['access']}"
-    header = {'HTTP_AUTHORIZATION': token}
-    response = client.post('/api/take-app', {'app_id': app.id}, **header)
+def test_take_app(client, app, header_with_auth):
+    response = client.post('/api/take-app', {'app_id': app.id}, **header_with_auth)
     assert response.data['name'] == 'Test'
     assert response.data['last_modified']
     assert response.data['last_update_info']
 
 
 @pytest.mark.django_db
-def test_add_app(client, auth):
-    token = f"Bearer {auth.data['access']}"
-    header = {'HTTP_AUTHORIZATION': token}
+def test_add_app(client, header_with_auth):
     response = client.post('/api/add-app',
                            {
                                'name': 'Test',
@@ -33,6 +26,6 @@ def test_add_app(client, auth):
                                'count_reviews': 1000,
                                'platform': 'Google Play',
                                'active': True
-                           }, **header)
+                           }, **header_with_auth)
     assert response.data['name'] == 'Test'
     assert response.status_code == 201
