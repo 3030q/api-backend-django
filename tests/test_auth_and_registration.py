@@ -39,7 +39,7 @@ def test_logout(client, auth):
     assert response.data == {'result': 'Logout was successful'}
 
 
-@pytest.mark.django_db
+@pytest.mark.django_db(reset_sequences=True)
 def test_take_user_info(client, auth):
     token = f"Bearer {auth.data['access']}"
     header = {'HTTP_AUTHORIZATION': token}
