@@ -1,3 +1,15 @@
-Django>=3.0,<4.0
-psycopg2-binary>=2.8
-gunicorn>=20.0.4
+Django == 3.2
+djangorestframework == 3.12.2
+psycopg2-binary == 2.8.6
+gunicorn == 20.0.4
+PyYaml == 5.4.1
+uritemplate == 3.0.1
+coreapi == 2.3.3
+djangorestframework-simplejwt == 4.6
+requests == 2.25.1
+json-rpc == 1.13.0
+pytest == 6.2.2
+pytest-django == 4.1.0
+django-redis == 4.12.1
+redis == 3.5.3
+pytest-cov == 2.11.1

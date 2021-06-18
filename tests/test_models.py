@@ -1,21 +1,16 @@
-from django.test import TestCase
-from parser_project import models
+import pytest
+from api.models import CustomUser
 
 
-class YourTestClass(TestCase):
+# @pytest.fixture()
+# def super_user():
+#     return CustomUser.objects.get(pk=1)
+#
+#
+# @pytest.mark.django_db
+# def test_my_user(super_user):
+#     assert super_user.is_superuser
 
-    def test_false_is_false(self):
-        print("Method: test_false_is_false.")
-        self.assertFalse(False)
 
-    def test_one_plus_one_equals_two(self):
-        print("Method: test_one_plus_one_equals_two.")
-        self.assertEqual(1 + 1, 2)
-
-    @staticmethod
-    def test_page_is_created_successfully():
-        page = models.Page(
-            name='Home',
-            slug='home'
-        )
-        page.save()
+def test_upper():
+    assert 'foo'.upper() == 'FOO'
