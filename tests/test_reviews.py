@@ -5,8 +5,9 @@ import pytest
 def test_take_reviews(client, header_with_auth, review, integration):
     response = client.post('/api/take-reviews',
                            {
-                               'integration_id': integration.id
+                                'integration_id': integration.id
                            }, **header_with_auth)
+    assert print(response.data)
     assert response.data[0]['id'] == review.id
 
 

@@ -27,6 +27,7 @@ urlpatterns = [
     path('integration-types', integration_views.take_all_integration_types, name='integration_types'),
     path('add-integration', integration_views.add_integration, name='add_integration'),
     path('integration-list', integration_views.take_integration_list, name='integration_list'),
-    path('take-reviews', review_views.take_reviews, name='take_reviews')
+    path('take-reviews', review_views.take_reviews, name='take_reviews'),
+    path('take-user-info', registration.take_user_info, name='take_user_info')
 ]
 

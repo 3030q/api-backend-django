@@ -17,15 +17,9 @@ def test_take_app(client, app, header_with_auth):
 def test_add_app(client, header_with_auth):
     response = client.post('/api/add-app',
                            {
-                               'name': 'Test',
                                'url': 'Test.com/test/test',
-                               'rating': 5.0,
-                               'dev_name': 'Testus',
-                               'version': 'v.2',
-                               'last_modified': datetime.now(tz=timezone.utc),
-                               'count_reviews': 1000,
                                'platform': 'Google Play',
-                               'active': True
+                               'active': False
                            }, **header_with_auth)
-    assert response.data['name'] == 'Test'
+    assert response.data['url'] == 'Test.com/test/test'
     assert response.status_code == 201

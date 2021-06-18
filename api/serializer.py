@@ -20,6 +20,15 @@ class AppSerializer(serializers.ModelSerializer):
         ]
 
 
+class AddAppSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = api.models.App
+        fields = [
+            'url',
+            'platform',
+        ]
+
+
 class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = api.models.Review
@@ -31,7 +40,6 @@ class ReviewSerializer(serializers.ModelSerializer):
             'last_update_info',
             'commentator_name',
             'rating',
-            'is_notified',
             'language'
         ]
 

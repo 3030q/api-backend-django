@@ -1,3 +1,5 @@
+import datetime
+
 import pytest
 from rest_framework_simplejwt.backends import TokenBackend
 
@@ -34,3 +36,24 @@ def test_logout(client, auth):
                            content_type='application/json',
                            **header)
     assert response.status_code == 205
+    assert response.data == {'result': 'Logout was successful'}
+
+
+@pytest.mark.django_db
+@pytest.mark.freeze_time()
+def test_take_user_info(client, auth):
+    token = f"Bearer {auth.data['access']}"
+    header = {'HTTP_AUTHORIZATION': token}
+    response = client.get('/api/take-user-info', **header)
+    assert response.data == {
+        'id': 1,
+        'last_login': None,
+        'is_superuser': False,
+        'first_name': 'TestUser',
+        'last_name': 'TestUser',
+        'is_staff': False,
+        'is_active': True,
+        'email': 'email@email.email',
+        'groups': [],
+        'user_permissions': []
+    }

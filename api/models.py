@@ -18,7 +18,7 @@ class CustomUser(AbstractUser):
 
 
 class App(models.Model):
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=50, default=None, blank=True, null=True)
     url = models.CharField(max_length=50, default=None, blank=True, null=True, unique=True)
     ratings = models.FloatField(default=None, blank=True, null=True)
     dev_name = models.CharField(max_length=50, default=None, blank=True, null=True)
@@ -37,7 +37,6 @@ class Review(models.Model):
     last_update_info = models.DateTimeField(auto_now=True, blank=True, null=True)
     commentator_name = models.CharField(max_length=50, default=None, blank=True, null=True)
     rating = models.IntegerField(default=None, blank=True, null=True)
-    is_notified = models.BooleanField(default=False)
     language = models.CharField(max_length=50, default=None, blank=True, null=True)
 
 

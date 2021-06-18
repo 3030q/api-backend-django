@@ -111,7 +111,6 @@ def review(app):
         description='TestTestTest',
         commentator_name='Eric Cartman',
         rating=5,
-        is_notified=False,
         language='ru'
     )
     return review

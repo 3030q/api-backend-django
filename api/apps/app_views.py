@@ -4,7 +4,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 from api.models import App
-from api.serializer import AppSerializer
+from api.serializer import AppSerializer, AddAppSerializer
 
 
 @api_view(['POST'])
@@ -13,7 +13,7 @@ def add_app(request):
     """
     Добавляет приложение приложение в общий пул
     """
-    serializer = AppSerializer(data=request.data)
+    serializer = AddAppSerializer(data=request.data)
     if serializer.is_valid():
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -29,4 +29,6 @@ def take_app(request):
     """
     app = App.objects.get(pk=request.data['app_id'])
     serializer = AppSerializer(app)
+    if not app.active:
+        return Response('Приложение не готово к использованию', status=status.HTTP_400_BAD_REQUEST)
     return Response(serializer.data, status=status.HTTP_200_OK)

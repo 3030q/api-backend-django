@@ -36,7 +36,7 @@ def remove_subscription(request):
         return Response("У данного пользователя нет подписки, или она истекла", status=status.HTTP_400_BAD_REQUEST)
     else:
         Subscription.objects.filter(user_id=request.user.id).delete()
-        return Response("Подписка отменена", status=status.HTTP_205_RESET_CONTENT)
+        return Response({'result': "Подписка отменена"}, status=status.HTTP_205_RESET_CONTENT)
 
 
 @api_view(['Get'])
