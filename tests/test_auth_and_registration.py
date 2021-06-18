@@ -40,7 +40,6 @@ def test_logout(client, auth):
 
 
 @pytest.mark.django_db
-@pytest.mark.freeze_time()
 def test_take_user_info(client, auth):
     token = f"Bearer {auth.data['access']}"
     header = {'HTTP_AUTHORIZATION': token}
