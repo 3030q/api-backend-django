@@ -89,5 +89,4 @@ def test_take_integration_types(client, integration_type):
 @pytest.mark.django_db
 def test_take_integration_list(client, header_with_auth, integration):
     response = client.get('/api/integration-list', **header_with_auth)
-    assert print(response.data)
     assert response.data[0]['id'] == integration.id

@@ -7,7 +7,6 @@ def test_take_reviews(client, header_with_auth, review, integration):
                            {
                                 'integration_id': integration.id
                            }, **header_with_auth)
-    assert print(response.data)
     assert response.data[0]['id'] == review.id
 
 
