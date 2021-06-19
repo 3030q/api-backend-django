@@ -13,3 +13,4 @@ pytest-django == 4.1.0
 django-redis == 4.12.1
 redis == 3.5.3
 pytest-cov == 2.11.1
+django-cors-headers == 3.7.0
