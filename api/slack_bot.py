@@ -52,7 +52,7 @@ def last_week_statistics(request):
             return HttpResponse(status=200)
     name, platform = tuple(data['text'].split())
     app = App.objects.filter(name=name, platform=platform).get()
-    print(AppSerializer(app))
+    print(AppSerializer(app).data)
     response_msg = ":wave:, Hello abobus"
     client.chat_postMessage(channel='#reviewgator-chat', text=response_msg)
     return HttpResponse(status=200)
