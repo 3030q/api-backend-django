@@ -16,7 +16,7 @@ def hello(request):
     client = slack.WebClient(token=settings.BOT_USER_ACCESS_TOKEN)
     json_dict = json.loads(request.body.decode('utf-8'))
     with open('ccc.json', 'w') as file:
-        file.write(json.dumps(json_dict))
+        json.dump(json_dict, file)
 
     if json_dict['token'] != settings.VERIFICATION_TOKEN:
         return HttpResponse(status=403)
