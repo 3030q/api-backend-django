@@ -29,7 +29,7 @@ urlpatterns = [
     path('integration-list', integration_views.take_integration_list, name='integration_list'),
     path('take-reviews', review_views.take_reviews, name='take_reviews'),
     path('take-user-info', registration.take_user_info, name='take_user_info'),
-    path('slack/hello', slack_bot.hello, name='hello_slack_bot')
-
+    path('slack/hello', slack_bot.hello, name='hello_slack_bot'),
+    path('slack/last-week-statistics', slack_bot.last_week_statistics, name='last_week_statistics')
 ]
 
