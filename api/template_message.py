@@ -89,7 +89,7 @@ def last_week_statistics_template(one_star, two_star, three_star, four_star, fiv
                         "alt_text": "cute cat"
                     },
                     {
-                        "type": "plain_text",
+                        "type": "mrkdwn",
                         "text":  f": *{two_star}*",
                     }
                 ]
@@ -123,7 +123,7 @@ def last_week_statistics_template(one_star, two_star, three_star, four_star, fiv
                         "alt_text": "cute cat"
                     },
                     {
-                        "type": "plain_text",
+                        "type": "mrkdwn",
                         "text":  f": *{three_star}*",
                     }
                 ]
@@ -157,7 +157,7 @@ def last_week_statistics_template(one_star, two_star, three_star, four_star, fiv
                         "alt_text": "cute cat"
                     },
                     {
-                        "type": "plain_text",
+                        "type": "mrkdwn",
                         "text": f": *{four_star}*",
                     }
                 ]
@@ -191,7 +191,7 @@ def last_week_statistics_template(one_star, two_star, three_star, four_star, fiv
                         "alt_text": "cute cat"
                     },
                     {
-                        "type": "plain_text",
+                        "type": "mrkdwn",
                         "text": f": *{five_star}*",
                     }
                 ]
