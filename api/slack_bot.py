@@ -10,6 +10,7 @@ from django.views.decorators.csrf import csrf_exempt
 from dotenv import load_dotenv
 from rest_framework.decorators import api_view
 
+from api import template_message
 from api.models import App, AppStoreReviews, GooglePlayReviews, AppGalleryReviews
 from api.reviews.review_serializer import AppStoreReviewSerializer, GooglePlayReviewSerializer, \
     AppGalleryReviewSerializer
@@ -71,7 +72,15 @@ def last_week_statistics(request):
             app_id=serialize_app['id'],
             posted_at__gt=datetime.datetime.now() - datetime.timedelta(days=7)
         ).all(), many=True)
-    print(reviews.data)
-    response_msg = ":wave:, Hello abobus"
-    client.chat_postMessage(channel='#reviewgator-chat', text=response_msg)
+    one_star = 0
+    two_star = 0
+    three_star = 0
+    four_star = 0
+    five_star = 0
+    date = datetime.date.today()
+    median_rating = 4.7
+    response_message = template_message.last_week_statistics_template(
+        one_star, two_star, three_star, four_star, five_star, name, date, median_rating
+    )
+    client.chat_postMessage(**response_message)
     return HttpResponse(status=200)
