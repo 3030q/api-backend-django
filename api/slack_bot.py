@@ -1,9 +1,12 @@
 import json
 
 import slack
+import os
+from pathlib import Path
 
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from dotenv import load_dotenv
 
 from api_backend_parser import settings
 
@@ -25,6 +28,6 @@ def hello(request):
         user = event_msg['user']
         channel = event_msg['channel']
         response_msg = ":wave:, Hello <@%s>" % user
-        client.chat_postMessage(channel=channel, text=response_msg)
+        client.chat_postMessage(channel='backend', text=response_msg)
         return HttpResponse(status=200)
     return HttpResponse(status=200)
