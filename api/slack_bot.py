@@ -21,10 +21,8 @@ def hello(request):
         if json_dict['type'] == 'url_verification':
             response_dict = {"challenge": json_dict['challenge']}
             return JsonResponse(response_dict, safe=False)
-    if 'event' in json_dict:
-        event_msg = json_dict['event']
-        if ('subtype' in event_msg) and (event_msg['subtype'] == 'bot_message'):
-            return HttpResponse(status=200)
-
-    client.chat_postMessage(channel='#backend', text='Heee')
+    if json_dict['command'] == '/hello_review_gator':
+        response_msg = ":wave:, Hello me"
+        client.chat_postMessage(channel='#backend', text=response_msg)
+        return HttpResponse(status=200)
     return HttpResponse(status=200)
