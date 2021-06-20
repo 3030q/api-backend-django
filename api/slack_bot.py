@@ -26,10 +26,8 @@ def hello(request):
         event_msg = data['event']
         if ('subtype' in event_msg) and (event_msg['subtype'] == 'bot_message'):
             return HttpResponse(status=200)
-    if data['command'] == '/hello_review_gator':
-        response_msg = ":wave:, Hello aboba"
-        client.chat_postMessage(channel='#backend', text=response_msg)
-        return HttpResponse(status=200)
+    response_msg = ":wave:, Hello aboba"
+    client.chat_postMessage(channel='#backend', text=response_msg)
     return HttpResponse(status=200)
 
 
@@ -48,6 +46,8 @@ def app_store_statistics(request):
         event_msg = data['event']
         if ('subtype' in event_msg) and (event_msg['subtype'] == 'bot_message'):
             return HttpResponse(status=200)
+    name, platform = tuple(data['text'].split())
+    print(name, platform)
     response_msg = ":wave:, Hello abobus"
-    client.chat_postMessage(channel='#backend', text=response_msg)
+    client.chat_postMessage(channel='#reviewgator-chat', text=response_msg)
     return HttpResponse(status=200)
