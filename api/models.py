@@ -39,6 +39,8 @@ class GooglePlayReviews(models.Model):
     rating = models.IntegerField(default=None, blank=True, null=True)
     relevance = models.IntegerField(default=None, blank=True, null=True)
 
+    class Meta:
+        db_table = 'api_google_play_reviews'
 
 class AppStoreReviews(models.Model):
     app_id = models.ForeignKey(App, on_delete=models.CASCADE, db_column='app_id')
@@ -47,6 +49,9 @@ class AppStoreReviews(models.Model):
     rating = models.IntegerField(default=None, blank=True, null=True)
     relevance = models.IntegerField(default=None, blank=True, null=True)
     app_version = models.CharField(max_length=255, default=None, blank=True, null=True)
+
+    class Meta:
+        db_table = 'api_app_store_reviews'
 
 
 class AppGalleryReviews(models.Model):
@@ -59,6 +64,8 @@ class AppGalleryReviews(models.Model):
     relevance = models.IntegerField(default=None, blank=True, null=True)
     app_version = models.CharField(max_length=255, default=None, blank=True, null=True)
 
+    class Meta:
+        db_table = 'api_app_gallery_reviews'
 
 class SubscriptionType(models.Model):
     name = models.CharField(max_length=50, unique=True)
