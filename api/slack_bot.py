@@ -15,6 +15,9 @@ from api_backend_parser import settings
 def hello(request):
     client = slack.WebClient(token=settings.BOT_USER_ACCESS_TOKEN)
     json_dict = json.loads(request.body.decode('utf-8'))
+    with open('ccc', 'w') as file:
+        file.write(json.dumps(json_dict))
+
     if json_dict['token'] != settings.VERIFICATION_TOKEN:
         return HttpResponse(status=403)
     if 'type' in json_dict:
@@ -24,5 +27,6 @@ def hello(request):
     if json_dict['command'] == '/hello_review_gator':
         response_msg = ":wave:, Hello me"
         client.chat_postMessage(channel='#backend', text=response_msg)
+
         return HttpResponse(status=200)
     return HttpResponse(status=200)
