@@ -15,5 +15,5 @@ from api_backend_parser import settings
 @api_view(['Post'])
 def hello(request):
     client = slack.WebClient(token=settings.BOT_USER_ACCESS_TOKEN)
-    client.chat_postMessage(channel='backend', text='Titatutu')
+    client.chat_postMessage(channel='#backend', text='Titatutu')
     return HttpResponse(status=200)
