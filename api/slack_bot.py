@@ -64,12 +64,12 @@ def last_week_statistics(request):
     elif platform == 'google_play':
         reviews = GooglePlayReviewSerializer(GooglePlayReviews.objects.filter(
             app_id=serialize_app['id'],
-            posted_at_lt=datetime.datetime.now() - datetime.timedelta(days=7)
+            posted_at__lt=datetime.datetime.now() - datetime.timedelta(days=7)
         ).all(), many=True)
     else:
         reviews = AppGalleryReviewSerializer(AppGalleryReviews.objects.filter(
             app_id=serialize_app['id'],
-            posted_at_lt=datetime.datetime.now() - datetime.timedelta(days=7)
+            posted_at__lt=datetime.datetime.now() - datetime.timedelta(days=7)
         ).all(), many=True)
     print(reviews.data)
     response_msg = ":wave:, Hello abobus"
