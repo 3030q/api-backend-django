@@ -15,6 +15,7 @@ from api_backend_parser import settings
 def hello(request):
     client = slack.WebClient(token=settings.BOT_USER_ACCESS_TOKEN)
     data = request.data
+    print(data)
     if data['token'] != settings.VERIFICATION_TOKEN:
         return HttpResponse(status=403)
     if 'type' in data:
