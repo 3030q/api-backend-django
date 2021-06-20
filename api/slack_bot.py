@@ -29,7 +29,7 @@ def hello(request):
     name, platform = tuple(data['text'].split())
     print(name, platform)
     response_msg = ":wave:, Hello aboba"
-    client.chat_postMessage(channel='#backend', text=response_msg)
+    client.chat_postMessage(channel='#reviewgator-chat', text=response_msg)
     return HttpResponse(status=200)
 
 
