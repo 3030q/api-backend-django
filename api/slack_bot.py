@@ -48,6 +48,6 @@ def app_store_statistics(request):
         event_msg = data['event']
         if ('subtype' in event_msg) and (event_msg['subtype'] == 'bot_message'):
             return HttpResponse(status=200)
-    response_msg = ":wave:, Hello aboba"
+    response_msg = ":wave:, Hello abobus"
     client.chat_postMessage(channel='#backend', text=response_msg)
     return HttpResponse(status=200)
