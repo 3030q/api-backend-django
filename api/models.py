@@ -19,7 +19,7 @@ class CustomUser(AbstractUser):
 
 class App(models.Model):
     name = models.CharField(max_length=50, default=None, blank=True, null=True)
-    url = models.CharField(max_length=50, default=None, blank=True, null=True, unique=True)
+    url = models.CharField(max_length=255, default=None, blank=True, null=True, unique=True)
     ratings = models.FloatField(default=None, blank=True, null=True)
     dev_name = models.CharField(max_length=50, default=None, blank=True, null=True)
     version = models.CharField(max_length=50, default=None, blank=True, null=True)
@@ -30,14 +30,34 @@ class App(models.Model):
     active = models.BooleanField(default=False)
 
 
-class Review(models.Model):
-    app = models.ForeignKey(App, on_delete=models.CASCADE, db_column='app_id')
-    description = models.TextField(default=None, blank=True, null=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    last_update_info = models.DateTimeField(auto_now=True, blank=True, null=True)
-    commentator_name = models.CharField(max_length=50, default=None, blank=True, null=True)
+class GooglePlayReviews(models.Model):
+    app_id = models.ForeignKey(App, on_delete=models.CASCADE, db_column='app_id')
+    username = models.CharField(max_length=255, default=None, blank=True, null=True)
+    text = models.TextField(default=None, blank=True, null=True)
+    posted_at = models.DateTimeField(default=None, blank=True, null=True)
+    avatar_link = models.CharField(max_length=255, default=None, blank=True, null=True)
     rating = models.IntegerField(default=None, blank=True, null=True)
-    language = models.CharField(max_length=50, default=None, blank=True, null=True)
+    relevance = models.IntegerField(default=None, blank=True, null=True)
+
+
+class AppStoreReviews(models.Model):
+    app_id = models.ForeignKey(App, on_delete=models.CASCADE, db_column='app_id')
+    username = models.CharField(max_length=255, default=None, blank=True, null=True, unique=True)
+    text = models.TextField(default=None, blank=True, null=True)
+    rating = models.IntegerField(default=None, blank=True, null=True)
+    relevance = models.IntegerField(default=None, blank=True, null=True)
+    app_version = models.CharField(max_length=255, default=None, blank=True, null=True)
+
+
+class AppGalleryReviews(models.Model):
+    app_id = models.ForeignKey(App, on_delete=models.CASCADE, db_column='app_id')
+    username = models.CharField(max_length=255, default=None, blank=True, null=True)
+    text = models.TextField(default=None, blank=True, null=True)
+    posted_at = models.DateTimeField(default=None, blank=True, null=True)
+    avatar_link = models.CharField(max_length=255, default=None, blank=True, null=True)
+    rating = models.IntegerField(default=None, blank=True, null=True)
+    relevance = models.IntegerField(default=None, blank=True, null=True)
+    app_version = models.CharField(max_length=255, default=None, blank=True, null=True)
 
 
 class SubscriptionType(models.Model):
@@ -71,8 +91,4 @@ class IntegrationType(models.Model):
 class Integration(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, db_column='user_id')
     app = models.ForeignKey(App, on_delete=models.CASCADE, db_column='app_id')
-    integration_type = models.ForeignKey(
-        IntegrationType,
-        on_delete=models.CASCADE,
-        db_column='integration_type_id'
-    )
+    slack_token = models.CharField(max_length=255, default=None, blank=True, null=True)

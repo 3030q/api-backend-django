@@ -5,7 +5,8 @@ import pytest
 def test_take_reviews(client, header_with_auth, review, integration):
     response = client.post('/api/take-reviews',
                            {
-                                'integration_id': integration.id
+                                'integration_id': integration.id,
+                                'platform': 'google_play'
                            }, **header_with_auth)
     assert response.data[0]['id'] == review.id
 
@@ -14,7 +15,8 @@ def test_take_reviews(client, header_with_auth, review, integration):
 def test_take_reviews_bad_integration(client, header_with_auth, review, integration):
     response = client.post('/api/take-reviews',
                            {
-                               'integration_id': 666
+                               'integration_id': 666,
+                               'platform': 'google_play'
                            }, **header_with_auth)
     try:
         assert not response.data[0]['id'] == review.id

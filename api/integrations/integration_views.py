@@ -23,18 +23,12 @@ def add_integration(request):
 
     if integrations_count >= subscribe.subscription_type.max_app_count:
         return Response("Количество доступных интеграций закончилось", status=status.HTTP_400_BAD_REQUEST)
-
-    try:
-        integration_type_id = IntegrationType.objects.get(pk=request.data['integration_type_id']).id
-    except IntegrationType.DoesNotExist:
-        return Response("Неверный тип интеграции", status=status.HTTP_400_BAD_REQUEST)
-
     try:
         app_id = App.objects.get(url=request.data['app_url']).id
     except App.DoesNotExist:
         app_id = App.objects.create(url=request.data['app_url']).id
     serializer = IntegrationSerializer(
-        data={'user': request.user.id, 'app': app_id, 'integration_type': integration_type_id})
+        data={'user': request.user.id, 'app': app_id, 'slack_token': request.data['slack_token']})
     if serializer.is_valid():
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)

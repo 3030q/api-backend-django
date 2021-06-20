@@ -29,21 +29,6 @@ class AddAppSerializer(serializers.ModelSerializer):
         ]
 
 
-class ReviewSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = api.models.Review
-        fields = [
-            'id',
-            'app',
-            'description',
-            'created_at',
-            'last_update_info',
-            'commentator_name',
-            'rating',
-            'language'
-        ]
-
-
 class SubscriptionTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = api.models.SubscriptionType
@@ -83,5 +68,5 @@ class IntegrationSerializer(serializers.ModelSerializer):
             'id',
             'user',
             'app',
-            'integration_type'
+            'slack_token'
         ]

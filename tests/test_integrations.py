@@ -12,7 +12,7 @@ def test_add_integration(client, header_with_auth, subscription, app, integratio
     response = client.post('/api/add-integration',
                            {
                                'app_url': 'Test.com/test/test',
-                               'integration_type_id': integration_type.id
+                               'slack_token': 'slack_token'
                            }, **header_with_auth)
     assert IntegrationSerializer(Integration.objects.get(pk=response.data['id'])).data == response.data
 
@@ -24,22 +24,7 @@ def test_add_integrations_with_expired_sub(client, header_with_auth, subscriptio
     response = client.post('/api/add-integration',
                            {
                                'app_url': 'Test.com/test/test',
-                               'integration_type_id': integration_type.id
-                           }, **header_with_auth)
-    assert response.status_code == 400
-    try:
-        fake_integration = Integration.objects.first()
-    except Integration.DoesNotExist:
-        fake_integration = None
-    assert fake_integration is None
-
-
-@pytest.mark.django_db
-def test_add_integrations_with_bad_type(client, header_with_auth, subscription, app, integration_type):
-    response = client.post('/api/add-integration',
-                           {
-                               'app_url': 'Test.com/test/test',
-                               'integration_type_id': -1
+                               'slack_token': 'slack_token'
                            }, **header_with_auth)
     assert response.status_code == 400
     try:
@@ -54,7 +39,7 @@ def test_add_integrations_without_app(client, header_with_auth, subscription, in
     response = client.post('/api/add-integration',
                            {
                                'app_url': 'other.test.url',
-                               'integration_type_id': integration_type.id
+                               'slack_token': 'slack_token'
                            }, **header_with_auth)
 
     assert response.status_code == 201
@@ -69,7 +54,7 @@ def test_add_integrations_max_limit(client, header_with_auth, subscription, app,
     response = client.post('/api/add-integration',
                            {
                                'app_url': 'other.test.url',
-                               'integration_type_id': integration_type.id
+                               'slack_token': 'slack_token'
                            }, **header_with_auth)
 
     assert response.status_code == 400

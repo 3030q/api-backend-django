@@ -31,7 +31,6 @@ ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", "localhost").split(" ")
 # Application definition
 
 INSTALLED_APPS = [
-    'corsheaders',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -40,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework_simplejwt.token_blacklist',
     'rest_framework',
+    'corsheaders',
     'api',
     'tests'
 ]
@@ -178,3 +178,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 SESSION_CACHE_ALIAS = "default"
+
+VERIFICATION_TOKEN = 'QGoC6NNwOcz5hSYNlPUd9Bsj'
+BOT_USER_ACCESS_TOKEN = 'xoxb-1880726399991-2214538529296-h1HiEylCafKn1xvdCECZlcC'
+CLIENT_ID = '1880726399991.2197050067476'
+CLIENT_SECRET = '037bc38a88a195c1f3253ec4a0361ca6'

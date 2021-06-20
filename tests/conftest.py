@@ -2,7 +2,7 @@ import datetime
 
 import pytest
 
-from api.models import App, CustomUser, IntegrationType, SubscriptionType, Subscription, Integration, Review
+from api.models import App, CustomUser, IntegrationType, SubscriptionType, Subscription, Integration, GooglePlayReviews
 
 
 @pytest.fixture()
@@ -99,18 +99,17 @@ def integration(test_user, app, integration_type):
     integration = Integration.objects.create(
         user=test_user,
         app=app,
-        integration_type=integration_type
+        slack_token='slack_token'
     )
     return integration
 
 
 @pytest.fixture
 def review(app):
-    review = Review.objects.create(
-        app=app,
-        description='TestTestTest',
-        commentator_name='Eric Cartman',
+    review = GooglePlayReviews.objects.create(
+        app_id=app,
+        text='TestTestTest',
+        username='Eric Cartman',
         rating=5,
-        language='ru'
     )
     return review
