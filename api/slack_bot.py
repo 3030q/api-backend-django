@@ -66,12 +66,12 @@ def last_week_statistics(request):
         reviews = GooglePlayReviewSerializer(GooglePlayReviews.objects.filter(
             app_id=serialize_app['id'],
             posted_at__gt=datetime.datetime.now() - datetime.timedelta(days=7)
-        ).all(), many=True)
+        ).all(), many=True).data
     else:
         reviews = AppGalleryReviewSerializer(AppGalleryReviews.objects.filter(
             app_id=serialize_app['id'],
             posted_at__gt=datetime.datetime.now() - datetime.timedelta(days=7)
-        ).all(), many=True)
+        ).all(), many=True).data
     one_star = 0
     two_star = 0
     three_star = 0
@@ -79,6 +79,9 @@ def last_week_statistics(request):
     five_star = 0
     date = datetime.date.today()
     median_rating = 4.7
+    for review in reviews:
+        print(review)
+
     response_message = template_message.last_week_statistics_template(
         one_star, two_star, three_star, four_star, five_star, name, date, median_rating
     )
