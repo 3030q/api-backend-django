@@ -31,7 +31,7 @@ class GooglePlayReviewSerializer(serializers.ModelSerializer):
 
 class AppStoreReviewSerializer(serializers.ModelSerializer):
     class Meta:
-        model = api.models.GooglePlayReviews
+        model = api.models.AppStoreReviews
         fields = [
             'id',
             'app_id',
@@ -45,7 +45,7 @@ class AppStoreReviewSerializer(serializers.ModelSerializer):
 
 class AppGalleryReviewSerializer(serializers.ModelSerializer):
     class Meta:
-        model = api.models.GooglePlayReviews
+        model = api.models.AppGalleryReviews
         fields = [
             'id',
             'app_id',
