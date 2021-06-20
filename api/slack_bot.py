@@ -1,3 +1,4 @@
+import datetime
 import json
 
 import slack
@@ -9,9 +10,12 @@ from django.views.decorators.csrf import csrf_exempt
 from dotenv import load_dotenv
 from rest_framework.decorators import api_view
 
-from api.models import App
+from api.models import App, AppStoreReviews, GooglePlayReviews, AppGalleryReviews
+from api.reviews.review_serializer import AppStoreReviewSerializer, GooglePlayReviewSerializer, \
+    AppGalleryReviewSerializer
 from api.serializer import AppSerializer
 from api_backend_parser import settings
+
 
 @api_view(['Post'])
 def hello(request):
@@ -52,7 +56,22 @@ def last_week_statistics(request):
             return HttpResponse(status=200)
     name, platform = tuple(data['text'].split())
     app = App.objects.filter(name=name, platform=platform).get()
-    print(AppSerializer(app).data)
+    serialize_app = AppSerializer(app).data
+    if platform == 'app_store':
+        client.chat_postMessage(channel='#reviewgator-chat',
+                                text='Нет возможности посмотреть статиску за неделю у этой платформы')
+        return HttpResponse(status=200)
+    elif platform == 'google_play':
+        reviews = GooglePlayReviewSerializer(GooglePlayReviews.objects.filter(
+            app_id=serialize_app['app_id'],
+            posted_at_lt=datetime.datetime.now() - datetime.timedelta(days=7)
+        ).all(), many=True)
+    else:
+        reviews = AppGalleryReviewSerializer(AppGalleryReviews.objects.filter(
+            app_id=serialize_app['app_id'],
+            posted_at_lt=datetime.datetime.now() - datetime.timedelta(days=7)
+        ).all(), many=True)
+    print(reviews.data)
     response_msg = ":wave:, Hello abobus"
     client.chat_postMessage(channel='#reviewgator-chat', text=response_msg)
     return HttpResponse(status=200)
