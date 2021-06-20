@@ -31,3 +31,23 @@ def hello(request):
         client.chat_postMessage(channel='#backend', text=response_msg)
         return HttpResponse(status=200)
     return HttpResponse(status=200)
+
+
+@api_view(['Post'])
+def app_store_statistics(request):
+    client = slack.WebClient(token=settings.BOT_USER_ACCESS_TOKEN)
+    data = request.data
+    print(data)
+    if data['token'] != settings.VERIFICATION_TOKEN:
+        return HttpResponse(status=403)
+    if 'type' in data:
+        if data['type'] == 'url_verification':
+            response_dict = {"challenge": data['challenge']}
+            return JsonResponse(response_dict, safe=False)
+    if 'event' in data:
+        event_msg = data['event']
+        if ('subtype' in event_msg) and (event_msg['subtype'] == 'bot_message'):
+            return HttpResponse(status=200)
+    response_msg = ":wave:, Hello aboba"
+    client.chat_postMessage(channel='#backend', text=response_msg)
+    return HttpResponse(status=200)
