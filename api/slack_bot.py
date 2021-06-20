@@ -7,6 +7,7 @@ from pathlib import Path
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from dotenv import load_dotenv
+from rest_framework.decorators import api_view
 
 from api_backend_parser import settings
 
