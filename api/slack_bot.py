@@ -27,8 +27,7 @@ def hello(request):
         if ('subtype' in event_msg) and (event_msg['subtype'] == 'bot_message'):
             return HttpResponse(status=200)
     if data['command'] == '/hello_review_gator':
-        user = event_msg['user']
-        response_msg = ":wave:, Hello <@%s>" % user
+        response_msg = ":wave:, Hello aboba"
         client.chat_postMessage(channel='#backend', text=response_msg)
         return HttpResponse(status=200)
     return HttpResponse(status=200)
