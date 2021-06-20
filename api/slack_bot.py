@@ -26,6 +26,8 @@ def hello(request):
         event_msg = data['event']
         if ('subtype' in event_msg) and (event_msg['subtype'] == 'bot_message'):
             return HttpResponse(status=200)
+    name, platform = tuple(data['text'].split())
+    print(name, platform)
     response_msg = ":wave:, Hello aboba"
     client.chat_postMessage(channel='#backend', text=response_msg)
     return HttpResponse(status=200)
