@@ -1,21 +1,11 @@
 import json
 
 import slack
-import os
-from pathlib import Path
 
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-from dotenv import load_dotenv
 
 from api_backend_parser import settings
-
-slack_env_path = Path('.') / '.slack_env'
-
-load_dotenv(dotenv_path=slack_env_path)
-
-client = slack.WebClient(token=os.environ['SLACK_TOKEN'])
-
 
 @csrf_exempt
 def hello(request):
