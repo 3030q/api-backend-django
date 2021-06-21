@@ -79,13 +79,13 @@ def last_week_statistics(request):
     five_star = 0
     date = datetime.date.today()
     for review in reviews:
-        if review['rating'] == '1':
+        if review['rating'] == 1:
             one_star += 1
-        elif review['rating'] == '2':
+        elif review['rating'] == 2:
             two_star += 1
-        elif review['rating'] == '3':
+        elif review['rating'] == 3:
             three_star += 1
-        elif review['rating'] == '4':
+        elif review['rating'] == 4:
             four_star += 1
         else:
             five_star += 1
