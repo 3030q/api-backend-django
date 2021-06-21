@@ -89,7 +89,8 @@ def last_week_statistics(request):
             four_star += 1
         else:
             five_star += 1
-    median_rating = one_star * 1 + two_star * 2 + three_star * 3 + four_star * 4 + five_star * 5
+    median_rating = (one_star * 1 + two_star * 2 + three_star * 3 + four_star * 4 + five_star * 5) / (
+                one_star + two_star + three_star + four_star + five_star)
 
     response_message = template_message.last_week_statistics_template(
         one_star, two_star, three_star, four_star, five_star, name, date, median_rating
