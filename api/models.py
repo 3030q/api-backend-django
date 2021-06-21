@@ -33,7 +33,7 @@ class App(models.Model):
 class GooglePlayReviews(models.Model):
     app_id = models.ForeignKey(App, on_delete=models.CASCADE, db_column='app_id')
     username = models.CharField(max_length=255, default=None, blank=True, null=True)
-    text = models.TextField(default=None, blank=True, null=True)
+    text = models.TextField(max_length=500, default=None, blank=True, null=True)
     posted_at = models.DateTimeField(default=None, blank=True, null=True)
     avatar_link = models.CharField(max_length=255, default=None, blank=True, null=True)
     rating = models.IntegerField(default=None, blank=True, null=True)
@@ -45,7 +45,7 @@ class GooglePlayReviews(models.Model):
 class AppStoreReviews(models.Model):
     app_id = models.ForeignKey(App, on_delete=models.CASCADE, db_column='app_id')
     username = models.CharField(max_length=255, default=None, blank=True, null=True, unique=True)
-    text = models.TextField(default=None, blank=True, null=True)
+    text = models.TextField(max_length=500, default=None, blank=True, null=True)
     rating = models.IntegerField(default=None, blank=True, null=True)
     relevance = models.IntegerField(default=None, blank=True, null=True)
     app_version = models.CharField(max_length=255, default=None, blank=True, null=True)
@@ -57,7 +57,7 @@ class AppStoreReviews(models.Model):
 class AppGalleryReviews(models.Model):
     app_id = models.ForeignKey(App, on_delete=models.CASCADE, db_column='app_id')
     username = models.CharField(max_length=255, default=None, blank=True, null=True)
-    text = models.TextField(default=None, blank=True, null=True)
+    text = models.TextField(max_length=500, default=None, blank=True, null=True)
     posted_at = models.DateTimeField(default=None, blank=True, null=True)
     avatar_link = models.CharField(max_length=255, default=None, blank=True, null=True)
     rating = models.IntegerField(default=None, blank=True, null=True)
